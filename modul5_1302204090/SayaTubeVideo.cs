@@ -15,19 +15,34 @@ namespace modul5_1302204090
 
 		public SayaTubeVideo(string title)
 		{
-			this.title = title;
+			SetTitle(title);
 			this.id = new Random().Next(10000, 99999);
 			this.playCount = 0;
 		}
 
 		public void IncreasePlayCount(int inc)
 		{
-			playCount += inc;
+			if (inc < 0) return;
+			if (inc > 25000000) return;
+
+			try {
+				playCount = checked(playCount + inc);
+			}catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
 		}
 
 		public void PrintVideoDetails()
 		{
 			Console.WriteLine("(" + this.id + ") " + this.title + " - " + this.playCount + " play(s)");
+		}
+
+		public void SetTitle(string title)
+		{
+			if (title == null) return;
+			if (title.Length > 200) return;
+			this.title = title;
 		}
 
 		public int GetPlayCount()

@@ -15,9 +15,18 @@ namespace modul5_1302204090
 
 		public SayaTubeUser(string username)
 		{
+			SetUsername(username);
 			this.id = new Random().Next(10000, 99999);
-			this.username = username;
 			this.uploadedVideos = new List<SayaTubeVideo>();
+		}
+
+		public void SetUsername(string username)
+		{
+			if (username == null) return;
+			if (username.Length == 0) return;
+			if (username.Length > 100) return;
+
+			this.username = username;
 		}
 
 		public int GetTotalVideoPlayCount()
@@ -34,7 +43,11 @@ namespace modul5_1302204090
 
 		public void AddVideo(SayaTubeVideo video)
 		{
-			this.uploadedVideos.Add(video);
+			if (video == null) return;
+			
+			if (video.GetPlayCount() < int.MaxValue) {
+				this.uploadedVideos.Add(video);
+			}
 		}
 
 		public void PrintAllVideoPlayCount()
@@ -43,6 +56,8 @@ namespace modul5_1302204090
 			Console.WriteLine("User: " + this.username);
 			foreach (SayaTubeVideo video in this.uploadedVideos)
 			{
+				if (index > 8) break;
+
 				Console.WriteLine("Video " + index + ": " + video.GetTitle());
 				index++;
 			}
