@@ -49,7 +49,7 @@ namespace modul5_1302204090
 			if (title == null) return;
 
 			// Cek jika jumlah karakter judul lebih dari 0 dan kurang dari 200
-			if (title.Length > 0) return;
+			if (title.Length == 0) return;
 			if (title.Length > 200) return;
 
 			this.title = title;
