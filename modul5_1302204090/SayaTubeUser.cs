@@ -39,7 +39,15 @@ namespace modul5_1302204090
 			// Loop tiap objek didalam list, lalu tambahkan ke field count
 			foreach (SayaTubeVideo video in this.uploadedVideos)
 			{
-				count += video.GetPlayCount();
+				try
+				{
+					count = checked(count + video.GetPlayCount());
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.Message);
+					break;
+				}
 			}
 
 			return count;
